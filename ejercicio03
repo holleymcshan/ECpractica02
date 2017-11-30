@@ -1,0 +1,19 @@
+5) RT2 <- SR			  #guardar una copia de SR (backup in RT3)		    //T8, C5
+6) RT3 <- RT2+0										                                  //MB=01, MA=0, SelA=00000, MR=1, SelCop=1010, C6, MC=1
+
+7) RT1 <- $0			  #contador a 0, inicializar					            //SelA=00000, MR=1, C4
+8) R1 <- RT1											                                  //T4, SelC=21, MR=0, LC
+
+9) RT1 <- R2			  #copia de la direccion R2 en RT1				        //T9, C4, SelA=16, MR=0
+
+10) MAR <- RT1		  #fetch								                          //T4, C0
+11) M <- MAR										                                    //TA, R, BW=00, M1=1, C1=1
+ MBR <- M			      #en MBR primer carácter de mi palabra
+
+12) RT2 <- MBR		  #RT2								                            //T1, C5
+13) SR <- RT2 + 0	  #sumar 0 y mi numero a ver es 0 por la ALU		  //MB=01, MA=0, SelA=00000, MR=1, SelCop=1010, MC=1, C7, M7=1, SelP=11
+14) IF[z==1]			  #implementamos el if/else   				            //A0=0, C=110, B0, MADDR=18
+15) R1 <- R1+1		  #cuando flag z no sea 0, primero contador++	    //MA=0, MB=11, SelCop=1010, MC=1, SelA=21, MR=0, SelC=21, LC
+16) RT1 <- RT1 +1		#aumentar la memoria++					                //MA=1, MB=11, SelCop=1010, MC=1, T6, C4
+17) jump to 10		  #salto								                          //MADDR=10, A0=0, C=0, B=1
+18)  SR <- RT3		  #el fin	y salto a fetch					                //T7, M7=0, C7, A0=1, C=0, B=1 
