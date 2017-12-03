@@ -10,19 +10,20 @@ main:
   	
   
   	la $a0 STR2
-  	jal skipspaces_1			#llamar a la subrutina
-  
+  	jal skipspaces_1 			#llamar a la subrutina
+    
+ 	 li $v0 10		#terminar el programa
+	syscall
 
 
 
-strlen_1:    move $a0 $t0
-	li $v0 0				#contador
-	li $t3 1
+strlen_1:    li $v0 0				#contador
+	li $t1 1
 
-bcle:   lbu $t1 ($t0) 				#char
-	beq $t0 $t1 fin				#si fin de string, salto a fin
-	add $v0 $v0 $t3				#aumentar contador
-	add $t0 $t0 $t3				#aumentar direccion de memoria
+bcle:   lbu $t0 ($a0) 				#char
+	beq $t0 $0 fin				#si fin de string, salto a fin
+	add $v0 $v0 $t1				#aumentar contador
+	add $a0 $a0 $t1				#aumentar direccion de memoria
 	b bcle
 
 fin:	jr $ra
@@ -36,4 +37,4 @@ bTrm: 	lbu $t1 ($v0)				#char
 	add $v0 $v0 $t3				#aumentar direccion de memoria
 	b bTrm
 
-finT: 	jr $ra
+finT: jr $ra
