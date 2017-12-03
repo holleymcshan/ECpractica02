@@ -12,8 +12,6 @@ main:
   	la $a0 STR2
   	jal skipspaces_1 			#llamar a la subrutina
     
- 	 li $v0 10		#terminar el programa
-	syscall
 
 
 
